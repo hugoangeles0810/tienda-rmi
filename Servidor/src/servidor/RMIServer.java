@@ -25,7 +25,6 @@ public class RMIServer {
       
       
       registry = LocateRegistry.createRegistry(parametros.getPortRMI());
-      System.out.println(usuarioServicio.getClass().getInterfaces()[0].getSimpleName());
       registry.bind(usuarioServicio.getClass().getInterfaces()[0].getSimpleName(), usuarioServicio);
     } catch (Exception e) {
       System.out.println("Error: " + e.getMessage());

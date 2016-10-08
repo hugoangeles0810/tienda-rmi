@@ -30,7 +30,7 @@ public class LoginPresentadorImpl implements LoginPresentador{
         loginVista.showProgress();
         
         usuarioServicio = ClienteRMI
-                          .getInstance(Parametros.HOST, Parametros.PORT)
+                          .getInstance()
                           .obtenerServicio(UsuarioServicio.class);
 
         try {

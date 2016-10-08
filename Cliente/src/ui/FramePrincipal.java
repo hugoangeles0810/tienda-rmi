@@ -2,10 +2,10 @@ package ui;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import javax.swing.JOptionPane;
 import presentador.PrincipalPresentador;
 import presentador.impl.PrincipalPresentadorImpl;
 import remoto.entidad.Usuario;
+import util.UIHelper;
 import vista.PrincipalVista;
 
 public class FramePrincipal extends javax.swing.JFrame 
@@ -25,6 +25,7 @@ public class FramePrincipal extends javax.swing.JFrame
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    jDesktopPane = new javax.swing.JDesktopPane();
     jMenuBar = new javax.swing.JMenuBar();
     jMenuSistema = new javax.swing.JMenu();
     jMenuItemIniciarSesion = new javax.swing.JMenuItem();
@@ -65,7 +66,12 @@ public class FramePrincipal extends javax.swing.JFrame
 
     jMenuMantenimiento.setText("Mantenimiento");
 
-    jMenuItemMantUsuario.setText("Usuario");
+    jMenuItemMantUsuario.setText("Usuarios");
+    jMenuItemMantUsuario.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemMantUsuarioActionPerformed(evt);
+      }
+    });
     jMenuMantenimiento.add(jMenuItemMantUsuario);
 
     jMenuBar.add(jMenuMantenimiento);
@@ -76,11 +82,11 @@ public class FramePrincipal extends javax.swing.JFrame
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 400, Short.MAX_VALUE)
+      .addComponent(jDesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 281, Short.MAX_VALUE)
+      .addComponent(jDesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
     );
 
     pack();
@@ -95,13 +101,25 @@ public class FramePrincipal extends javax.swing.JFrame
   }//GEN-LAST:event_jMenuItemIniciarSesionActionPerformed
 
   private void jMenuItemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCerrarSesionActionPerformed
+    jDesktopPane.removeAll();
     principalPresentador.onMenuCerrarSesion();
   }//GEN-LAST:event_jMenuItemCerrarSesionActionPerformed
+
+  private void jMenuItemMantUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMantUsuarioActionPerformed
+    if (internalFrameUsuarios == null || !internalFrameUsuarios.isDisplayable()) {
+      internalFrameUsuarios = new InternalFrameUsuarios();
+      jDesktopPane.add(internalFrameUsuarios);
+    }
+    internalFrameUsuarios.setLocation((getWidth()-internalFrameUsuarios.getWidth())/2, (getHeight()-internalFrameUsuarios.getHeight())/2);
+    internalFrameUsuarios.show();
+  }//GEN-LAST:event_jMenuItemMantUsuarioActionPerformed
 
  
 private PrincipalPresentador principalPresentador;
 private DialogLogin dialogLogin;
+private InternalFrameUsuarios internalFrameUsuarios;
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JDesktopPane jDesktopPane;
   private javax.swing.JMenuBar jMenuBar;
   private javax.swing.JMenuItem jMenuItemCerrarSesion;
   private javax.swing.JMenuItem jMenuItemIniciarSesion;
@@ -122,7 +140,7 @@ private DialogLogin dialogLogin;
 
   @Override
   public void ocultarLoginForm() {
-    JOptionPane.showMessageDialog(this, "Ocultando login");
+    // Do not nothing
   }
 
   @Override
@@ -136,6 +154,6 @@ private DialogLogin dialogLogin;
   public void loginSuccess(Usuario usuario) {
     dialogLogin.dispose();
     enableMenuOptions(true);
-    JOptionPane.showMessageDialog(this, "Usuario " + usuario.getUsername() + " logueado exitosamente!");
+    UIHelper.showInfo(this, "Usuario " + usuario.getUsername() + " logueado exitosamente!");
   }
 }

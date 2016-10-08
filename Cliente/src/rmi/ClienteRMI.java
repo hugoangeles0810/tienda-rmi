@@ -7,6 +7,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import util.Parametros;
 
 public class ClienteRMI {
   
@@ -31,8 +32,8 @@ public class ClienteRMI {
     return null;
   }
   
-  public static ClienteRMI getInstance(String direccion, Integer puerto) {
-    return new ClienteRMI(direccion, puerto);
+  public static ClienteRMI getInstance() {
+    return new ClienteRMI(Parametros.HOST, Parametros.PORT);
   }
   
 }

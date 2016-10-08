@@ -1,10 +1,10 @@
 package ui;
 
-import javax.swing.JOptionPane;
 import presentador.LoginPresentador;
 import presentador.impl.LoginPresentadorImpl;
 import remoto.entidad.Usuario;
 import util.Parametros;
+import util.UIHelper;
 import util.Validator;
 import vista.LoginVista;
 
@@ -24,6 +24,7 @@ public class DialogLogin extends javax.swing.JDialog
     jTextFieldPuerto.setText(String.valueOf(Parametros.PORT));
     loginPresentador = new LoginPresentadorImpl(this);
     this.onLoginSuccess = onLoginSuccess;
+    getRootPane().setDefaultButton(jButtonIngresar);
   }
 
   @SuppressWarnings("unchecked")
@@ -196,27 +197,27 @@ public class DialogLogin extends javax.swing.JDialog
   
   private Boolean esFormularioValido() {
     if (jTextFieldHost.getText().trim().equals("")) {
-      JOptionPane.showMessageDialog(this, "Debe ingresar el host del servidor.");
+      UIHelper.showError(this, "Debe ingresar el host del servidor.");
       return false;
     }
     
     if (jTextFieldPuerto.getText().equals("")) {
-      JOptionPane.showMessageDialog(this, "Debe ingresar el puerto del servidor.");
+      UIHelper.showError(this, "Debe ingresar el puerto del servidor.");
       return false;
     }
     
     if (!Validator.esEnteroPositivo(jTextFieldPuerto.getText())) {
-      JOptionPane.showMessageDialog(this, "El campo puerto debe ser un número.");
+      UIHelper.showError(this, "El campo puerto debe ser un número.");
       return false;
     }
     
     if (jTextFieldUsername.getText().trim().equals("")) {
-      JOptionPane.showMessageDialog(this, "Debe ingresar su nombre de usuario.");
+      UIHelper.showError(this, "Debe ingresar su nombre de usuario.");
       return false;
     }
     
     if (new String(jPasswordFieldPassword.getPassword()).equals("")) {
-      JOptionPane.showMessageDialog(this, "Debe ingresar su contraseña.");
+      UIHelper.showError(this, "Debe ingresar su contraseña.");
       return false;
     }
     
@@ -274,11 +275,11 @@ public class DialogLogin extends javax.swing.JDialog
 
   @Override
   public void onLoginFailed() {
-    JOptionPane.showMessageDialog(this, "Usuario y/o constraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+    UIHelper.showError(this, "Usuario y/o constraseña incorrectos");
   }
 
   @Override
   public void onLoginError() {
-    JOptionPane.showMessageDialog(this, "Error al conectar con el servidor", "Error", JOptionPane.ERROR_MESSAGE);
+    UIHelper.showError(this, "Error al conectar con el servidor");
   }
 }

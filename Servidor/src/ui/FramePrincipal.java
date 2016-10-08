@@ -65,7 +65,7 @@ public class FramePrincipal extends javax.swing.JFrame
     jTextFieldHost.setText("localhost");
     jTextFieldPuertoBD.setText("3306");
     jTextFieldPuertoRMI.setText("8084");
-    jTextFieldNombreBD.setText("banco");
+    jTextFieldNombreBD.setText("tienda_db");
     jTextFieldUsuarioBD.setText("root");
 
     javax.swing.GroupLayout jPanelConfiguracionLayout = new javax.swing.GroupLayout(jPanelConfiguracion);

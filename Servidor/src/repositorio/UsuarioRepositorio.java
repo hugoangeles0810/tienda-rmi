@@ -10,6 +10,7 @@ public interface UsuarioRepositorio {
   public void actualizar(Usuario usuario);
   public void eliminar(Usuario usuario);
   public List<Usuario> listar();
+  public List<Usuario> filtrar(Usuario usuario);
   public Usuario obtenerPorLogin(String login);
 
 }

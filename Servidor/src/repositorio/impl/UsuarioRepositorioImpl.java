@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import remoto.entidad.Usuario;
 import repositorio.UsuarioRepositorio;
@@ -23,7 +25,7 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio {
   public void guardar(Usuario usuario) {
     try {
       PreparedStatement statement = this.connection
-                .prepareStatement("insert into usuario (login, password) values (?,?)", Statement.RETURN_GENERATED_KEYS);
+                .prepareStatement("insert into usuarios (username, password) values (?,?)", Statement.RETURN_GENERATED_KEYS);
 
       statement.setString(1, usuario.getUsername());
       statement.setString(2, usuario.getPassword());
@@ -46,7 +48,7 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio {
   public void actualizar(Usuario usuario) {
     try {
       PreparedStatement statement = this.connection
-                .prepareStatement("update usuario set login=?, password=? where id=?");
+                .prepareStatement("update usuarios set username=?, password=? where id=?");
 
       statement.setString(1, usuario.getUsername());
       statement.setString(2, usuario.getPassword());
@@ -62,7 +64,7 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio {
   public void eliminar(Usuario usuario) {
     try {
       PreparedStatement statement = this.connection
-                .prepareStatement("delete from usuario where id=?");
+                .prepareStatement("delete from usuarios where id=?");
 
       statement.setInt(1, usuario.getId());
       statement.executeUpdate();
@@ -78,7 +80,7 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio {
     List<Usuario> usuarios = new ArrayList<>();
     try {
       PreparedStatement statement = this.connection
-                .prepareStatement("select * from usuario");
+                .prepareStatement("select * from usuarios");
 
       ResultSet rs = statement.executeQuery();
       while (rs.next()) {
@@ -101,21 +103,58 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio {
 
     try {
       PreparedStatement statement = this.connection
-                .prepareStatement("select * from usuario where login=?");
+                .prepareStatement("select * from usuarios where username=?");
 
       statement.setString(1, login);
       ResultSet rs = statement.executeQuery();
       if (rs.next()) {
-        usuario = new Usuario();
-        usuario.setId(rs.getInt(1));
-        usuario.setUsername(rs.getString(2));
-        usuario.setPassword(rs.getString(3));
+        usuario = parseUsuario(rs);
       }
 
     } catch(SQLException e) {
       e.printStackTrace();
     }
 
+    return usuario;
+  }
+
+  @Override
+  public List<Usuario> filtrar(Usuario usuario) {
+    List<Usuario> usuarios = new ArrayList<>();
+    try {
+      PreparedStatement statement = this.connection
+                .prepareStatement("select * from usuarios where username like ?");
+      
+      String username = "";
+      if (usuario.getUsername() != null) {
+        username = usuario.getUsername();
+      }
+      
+      statement.setString(1, "%"+username+"%");
+      
+      ResultSet rs = statement.executeQuery();
+      while (rs.next()) {
+        usuarios.add(parseUsuario(rs));
+      }
+      
+    } catch(SQLException e) {
+      e.printStackTrace();
+    }
+    
+    return usuarios;
+  }
+  
+  private Usuario parseUsuario(ResultSet rs) {
+    Usuario usuario = null;
+    try {
+      usuario = new Usuario();
+      usuario.setId(rs.getInt(1));
+      usuario.setUsername(rs.getString(2));
+      usuario.setPassword(rs.getString(3));
+    } catch (SQLException ex) {
+      System.out.println("Error: " + ex.getMessage());
+    }
+    
     return usuario;
   }
 
