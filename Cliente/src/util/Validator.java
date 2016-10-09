@@ -14,6 +14,32 @@ public class Validator {
     }
   }
   
+  public static Boolean esDouble(String numStr) {
+    try {
+      Double number = Double.parseDouble(numStr);
+      return true;
+    } catch (NumberFormatException e) {
+      return false;
+    }
+  }
+  
+  public static Boolean esDouble(JTextField jtf) {
+    return esDouble(jtf.getText());
+  }
+  
+  public static Boolean esDoubleEnRango(String numStr, Double min, Double max) {
+    try {
+      Double number = Double.parseDouble(numStr);
+      return number >= min && number <= max;
+    } catch (NumberFormatException e) {
+      return false;
+    }
+  }
+  
+  public static Boolean esDoubleEnRango(JTextField jtf, Double min, Double max) {
+    return esDoubleEnRango(jtf.getText(), min, max);
+  }
+  
   public static Boolean isEmpty(String str) {
     return str.equals("");
   }

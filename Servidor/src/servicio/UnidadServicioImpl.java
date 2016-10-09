@@ -27,7 +27,7 @@ public class UnidadServicioImpl extends UnicastRemoteObject
   public RespuestaServidor guardarUnidad(Unidad unidad) throws RemoteException {
     if (!esDuplicado(unidad)) {
       unidadRepositorio.guardar(unidad);
-      return RespuestaServidor.getExito("Unidad registrado existosamente.");
+      return RespuestaServidor.getExito("Unidad registrada existosamente.");
     } else {
       return RespuestaServidor.getError("El nombre y/o abreviatura ingresado ya está registrado.");
     }

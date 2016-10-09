@@ -1,7 +1,6 @@
 package presentador;
 
 import remoto.entidad.Unidad;
-import remoto.entidad.Usuario;
 
 public interface UnidadesPresentador {
   

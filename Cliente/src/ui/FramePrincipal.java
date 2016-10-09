@@ -32,8 +32,9 @@ public class FramePrincipal extends javax.swing.JFrame
     jMenuItemCerrarSesion = new javax.swing.JMenuItem();
     jMenuItemSalir = new javax.swing.JMenuItem();
     jMenuMantenimiento = new javax.swing.JMenu();
+    jMenuItemMantProductos = new javax.swing.JMenuItem();
     jMenuItemMantUsuario = new javax.swing.JMenuItem();
-    jMenuItemUnidades = new javax.swing.JMenuItem();
+    jMenuItemMantUnidades = new javax.swing.JMenuItem();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +68,14 @@ public class FramePrincipal extends javax.swing.JFrame
 
     jMenuMantenimiento.setText("Mantenimiento");
 
+    jMenuItemMantProductos.setText("Productos");
+    jMenuItemMantProductos.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemMantProductosActionPerformed(evt);
+      }
+    });
+    jMenuMantenimiento.add(jMenuItemMantProductos);
+
     jMenuItemMantUsuario.setText("Usuarios");
     jMenuItemMantUsuario.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,13 +84,13 @@ public class FramePrincipal extends javax.swing.JFrame
     });
     jMenuMantenimiento.add(jMenuItemMantUsuario);
 
-    jMenuItemUnidades.setText("Unidades");
-    jMenuItemUnidades.addActionListener(new java.awt.event.ActionListener() {
+    jMenuItemMantUnidades.setText("Unidades");
+    jMenuItemMantUnidades.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jMenuItemUnidadesActionPerformed(evt);
+        jMenuItemMantUnidadesActionPerformed(evt);
       }
     });
-    jMenuMantenimiento.add(jMenuItemUnidades);
+    jMenuMantenimiento.add(jMenuItemMantUnidades);
 
     jMenuBar.add(jMenuMantenimiento);
 
@@ -124,28 +133,39 @@ public class FramePrincipal extends javax.swing.JFrame
     internalFrameUsuarios.show();
   }//GEN-LAST:event_jMenuItemMantUsuarioActionPerformed
 
-  private void jMenuItemUnidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUnidadesActionPerformed
+  private void jMenuItemMantUnidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMantUnidadesActionPerformed
     if (internalFrameUnidades == null || !internalFrameUnidades.isDisplayable()) {
       internalFrameUnidades = new InternalFrameUnidades();
       jDesktopPane.add(internalFrameUnidades);
     }
     internalFrameUnidades.setLocation((getWidth()-internalFrameUnidades.getWidth())/2, (getHeight()-internalFrameUnidades.getHeight())/2);
     internalFrameUnidades.show();
-  }//GEN-LAST:event_jMenuItemUnidadesActionPerformed
+  }//GEN-LAST:event_jMenuItemMantUnidadesActionPerformed
+
+  private void jMenuItemMantProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMantProductosActionPerformed
+    if (internalFrameProductos == null || !internalFrameProductos.isDisplayable()) {
+      internalFrameProductos = new InternalFrameProductos();
+      jDesktopPane.add(internalFrameProductos);
+    }
+    internalFrameProductos.setLocation((getWidth()-internalFrameProductos.getWidth())/2, (getHeight()-internalFrameProductos.getHeight())/2);
+    internalFrameProductos.show();
+  }//GEN-LAST:event_jMenuItemMantProductosActionPerformed
 
  
 private PrincipalPresentador principalPresentador;
 private DialogLogin dialogLogin;
 private InternalFrameUsuarios internalFrameUsuarios;
 private InternalFrameUnidades internalFrameUnidades;
+private InternalFrameProductos internalFrameProductos;
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JDesktopPane jDesktopPane;
   private javax.swing.JMenuBar jMenuBar;
   private javax.swing.JMenuItem jMenuItemCerrarSesion;
   private javax.swing.JMenuItem jMenuItemIniciarSesion;
+  private javax.swing.JMenuItem jMenuItemMantProductos;
+  private javax.swing.JMenuItem jMenuItemMantUnidades;
   private javax.swing.JMenuItem jMenuItemMantUsuario;
   private javax.swing.JMenuItem jMenuItemSalir;
-  private javax.swing.JMenuItem jMenuItemUnidades;
   private javax.swing.JMenu jMenuMantenimiento;
   private javax.swing.JMenu jMenuSistema;
   // End of variables declaration//GEN-END:variables
