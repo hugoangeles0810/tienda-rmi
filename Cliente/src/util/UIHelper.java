@@ -18,7 +18,7 @@ public class UIHelper {
   }
   
   public static void showInfo(Component cmp, String msg) {
-    JOptionPane.showMessageDialog(cmp, msg, "Error", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(cmp, msg, "Info", JOptionPane.INFORMATION_MESSAGE);
   }
 
   public static void showError(Component cmp, String msg) {

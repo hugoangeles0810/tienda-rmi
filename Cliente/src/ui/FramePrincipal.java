@@ -33,6 +33,7 @@ public class FramePrincipal extends javax.swing.JFrame
     jMenuItemSalir = new javax.swing.JMenuItem();
     jMenuMantenimiento = new javax.swing.JMenu();
     jMenuItemMantUsuario = new javax.swing.JMenuItem();
+    jMenuItemUnidades = new javax.swing.JMenuItem();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +75,14 @@ public class FramePrincipal extends javax.swing.JFrame
     });
     jMenuMantenimiento.add(jMenuItemMantUsuario);
 
+    jMenuItemUnidades.setText("Unidades");
+    jMenuItemUnidades.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemUnidadesActionPerformed(evt);
+      }
+    });
+    jMenuMantenimiento.add(jMenuItemUnidades);
+
     jMenuBar.add(jMenuMantenimiento);
 
     setJMenuBar(jMenuBar);
@@ -102,6 +111,7 @@ public class FramePrincipal extends javax.swing.JFrame
 
   private void jMenuItemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCerrarSesionActionPerformed
     jDesktopPane.removeAll();
+    jDesktopPane.repaint();
     principalPresentador.onMenuCerrarSesion();
   }//GEN-LAST:event_jMenuItemCerrarSesionActionPerformed
 
@@ -114,10 +124,20 @@ public class FramePrincipal extends javax.swing.JFrame
     internalFrameUsuarios.show();
   }//GEN-LAST:event_jMenuItemMantUsuarioActionPerformed
 
+  private void jMenuItemUnidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUnidadesActionPerformed
+    if (internalFrameUnidades == null || !internalFrameUnidades.isDisplayable()) {
+      internalFrameUnidades = new InternalFrameUnidades();
+      jDesktopPane.add(internalFrameUnidades);
+    }
+    internalFrameUnidades.setLocation((getWidth()-internalFrameUnidades.getWidth())/2, (getHeight()-internalFrameUnidades.getHeight())/2);
+    internalFrameUnidades.show();
+  }//GEN-LAST:event_jMenuItemUnidadesActionPerformed
+
  
 private PrincipalPresentador principalPresentador;
 private DialogLogin dialogLogin;
 private InternalFrameUsuarios internalFrameUsuarios;
+private InternalFrameUnidades internalFrameUnidades;
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JDesktopPane jDesktopPane;
   private javax.swing.JMenuBar jMenuBar;
@@ -125,6 +145,7 @@ private InternalFrameUsuarios internalFrameUsuarios;
   private javax.swing.JMenuItem jMenuItemIniciarSesion;
   private javax.swing.JMenuItem jMenuItemMantUsuario;
   private javax.swing.JMenuItem jMenuItemSalir;
+  private javax.swing.JMenuItem jMenuItemUnidades;
   private javax.swing.JMenu jMenuMantenimiento;
   private javax.swing.JMenu jMenuSistema;
   // End of variables declaration//GEN-END:variables

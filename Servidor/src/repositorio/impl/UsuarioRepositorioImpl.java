@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import remoto.entidad.Usuario;
 import repositorio.UsuarioRepositorio;
@@ -70,7 +68,6 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio {
       statement.executeUpdate();
       usuario.setId(null);
 
-      System.out.println(usuario);
     } catch(SQLException e) {
       e.printStackTrace();
     }
@@ -84,11 +81,7 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio {
 
       ResultSet rs = statement.executeQuery();
       while (rs.next()) {
-        Usuario usuario = new Usuario();
-        usuario.setId(rs.getInt(1));
-        usuario.setUsername(rs.getString(2));
-        usuario.setPassword(rs.getString(3));
-
+        Usuario usuario = parseUsuario(rs);
         usuarios.add(usuario);
       }
 
