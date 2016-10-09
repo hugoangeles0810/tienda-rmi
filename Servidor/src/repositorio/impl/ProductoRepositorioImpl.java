@@ -12,6 +12,7 @@ import remoto.entidad.Unidad;
 import repositorio.ProductoRepositorio;
 
 public class ProductoRepositorioImpl implements ProductoRepositorio{
+  
   private Connection connection;
 
   public ProductoRepositorioImpl(Connection connection) {
@@ -151,6 +152,27 @@ public class ProductoRepositorioImpl implements ProductoRepositorio{
                 .prepareStatement("select p.id, p.nombre, p.stock, und.id, und.nombre, und.abreviatura from productos p inner join unidades und on p.unidad_id = und.id where p.nombre=?");
 
       statement.setString(1, nombre);
+      ResultSet rs = statement.executeQuery();
+      if (rs.next()) {
+        producto = parseProducto(rs);
+      }
+
+    } catch(SQLException e) {
+      e.printStackTrace();
+    }
+
+    return producto;
+  }
+
+  @Override
+  public Producto obtener(Integer id) {
+    Producto producto = null;
+
+    try {
+      PreparedStatement statement = this.connection
+                .prepareStatement("select p.id, p.nombre, p.stock, und.id, und.nombre, und.abreviatura from productos p inner join unidades und on p.unidad_id = und.id where p.id=?");
+
+      statement.setInt(1, id);
       ResultSet rs = statement.executeQuery();
       if (rs.next()) {
         producto = parseProducto(rs);

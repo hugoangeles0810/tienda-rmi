@@ -341,7 +341,7 @@ public class InternalFrameUnidades extends javax.swing.JInternalFrame
   private void jTableListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListadoMouseClicked
     int row = jTableListado.rowAtPoint(evt.getPoint());
     if (row >= 0) {
-      seleccionar(row);
+      unidadesPresentador.buscarPorId(unidades.get(row).getId());
     }
   }//GEN-LAST:event_jTableListadoMouseClicked
 
@@ -438,9 +438,9 @@ public class InternalFrameUnidades extends javax.swing.JInternalFrame
     UIHelper.cancelar(jButtonNuevo, jButtonGuardar, jButtonModificar, jButtonEliminar, jButtonCancelar);
   }
   
-  private void seleccionar(int row) {
+  private void seleccionar(Unidad unidad) {
     enableForm(false);
-    unidadForm = unidades.get(row);
+    unidadForm = unidad;
     fillForm(unidadForm);
     UIHelper.seleccionar(jButtonNuevo, jButtonGuardar, jButtonModificar, jButtonEliminar, jButtonCancelar);
   }
@@ -487,5 +487,10 @@ public class InternalFrameUnidades extends javax.swing.JInternalFrame
     }
     
     return true;
+  }
+
+  @Override
+  public void onUnidadSelected(Unidad unidad) {
+    seleccionar(unidad);
   }
 }

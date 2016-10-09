@@ -3,6 +3,7 @@ package util;
 import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class UIHelper {
@@ -62,6 +63,12 @@ public class UIHelper {
     btnModificar.setEnabled(false);
     btnEliminar.setEnabled(false);
     btnCancelar.setEnabled(true);
+  }
+  
+  public static void cleanTextField(JTextField... textFields) {
+    for (JTextField textField : textFields) {
+      textField.setText("");
+    }
   }
   
 }

@@ -62,4 +62,9 @@ public class ProductoServicioImpl extends UnicastRemoteObject
       return RespuestaServidor.getError("Error al eliminar la producto.");
     }
   }
+
+  @Override
+  public Producto obtener(Integer id) throws RemoteException {
+    return productoRepositorio.obtener(id);
+  }
 }

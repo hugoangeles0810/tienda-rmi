@@ -17,16 +17,18 @@ public class ConnectionFactory {
   public static Connection getConnection() {
     try {
 
-      String driver = "com.mysql.jdbc.Driver";
-      String host = parametros.getHostDB();
-      Integer port = parametros.getPortDB();
-      String user = parametros.getUserDB();
-      String pass = parametros.getPassDB();
-      String database = parametros.getNameDB();
-      String url = "jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true&useSSL=false";
+      if (connection == null || connection.isClosed()) {
+        String driver = "com.mysql.jdbc.Driver";
+        String host = parametros.getHostDB();
+        Integer port = parametros.getPortDB();
+        String user = parametros.getUserDB();
+        String pass = parametros.getPassDB();
+        String database = parametros.getNameDB();
+        String url = "jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true&useSSL=false";
 
-      Class.forName(driver);
-      connection = DriverManager.getConnection(url, user, pass);
+        Class.forName(driver);
+        connection = DriverManager.getConnection(url, user, pass);
+      }
 
     } catch(ClassNotFoundException e) {
       connection = null;
@@ -41,10 +43,25 @@ public class ConnectionFactory {
 
   public static Boolean testConnection() {
     Boolean isConnected = false;
+    Connection conTest = null;
     try {
-      Connection con = getConnection();
-      isConnected = con != null && !con.isClosed();
-     } catch(SQLException e) {
+      String driver = "com.mysql.jdbc.Driver";
+      String host = parametros.getHostDB();
+      Integer port = parametros.getPortDB();
+      String user = parametros.getUserDB();
+      String pass = parametros.getPassDB();
+      String database = parametros.getNameDB();
+      String url = "jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true&useSSL=false";
+
+      Class.forName(driver);
+      conTest = DriverManager.getConnection(url, user, pass);
+      
+      isConnected = conTest != null && !conTest.isClosed();
+    } catch(ClassNotFoundException e) {
+      isConnected = false;
+      e.printStackTrace();
+    } catch(SQLException e) {
+      isConnected = false;
       e.printStackTrace();
     }
 

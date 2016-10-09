@@ -8,6 +8,7 @@ import remoto.util.RespuestaServidor;
 
 public interface UsuarioServicio extends Remote {
 
+  public Usuario obtener(Integer id) throws RemoteException;
   public Boolean esUsuarioValido(Usuario usuario) throws RemoteException;
   public List<Usuario> buscarUsuarios(Usuario usuario) throws RemoteException;
   public RespuestaServidor guardarUsuario(Usuario usuario) throws RemoteException;

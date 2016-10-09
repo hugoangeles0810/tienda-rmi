@@ -151,4 +151,25 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio {
     return usuario;
   }
 
+  @Override
+  public Usuario obtener(Integer id) {
+    Usuario usuario = null;
+
+    try {
+      PreparedStatement statement = this.connection
+                .prepareStatement("select * from usuarios where id=?");
+
+      statement.setInt(1, id);
+      ResultSet rs = statement.executeQuery();
+      if (rs.next()) {
+        usuario = parseUsuario(rs);
+      }
+
+    } catch(SQLException e) {
+      e.printStackTrace();
+    }
+
+    return usuario;
+  }
+
 }

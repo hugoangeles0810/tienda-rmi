@@ -5,6 +5,7 @@ import remoto.entidad.Unidad;
 
 public interface UnidadRepositorio {
   
+  public Unidad obtener(Integer id);
   public void guardar(Unidad unidad);
   public void actualizar(Unidad unidad);
   public void eliminar(Unidad unidad);

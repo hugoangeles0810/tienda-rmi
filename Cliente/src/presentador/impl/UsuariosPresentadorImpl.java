@@ -70,8 +70,25 @@ public class UsuariosPresentadorImpl implements UsuariosPresentador{
       } else {
         vista.onActionFailed(respuestaServidor.getMsg());
       }
-    } catch (RemoteException ex) {
+    } catch (RemoteException|NullPointerException ex) {
       vista.showError("Error al conectar con el servidor");
+    }
+  }
+
+  @Override
+  public void buscarPorId(Integer id) {
+    UsuarioServicio usuarioServicio = ClienteRMI
+                                        .getInstance()
+                                        .obtenerServicio(UsuarioServicio.class);
+    try {
+      Usuario usuario = usuarioServicio.obtener(id);
+      if (usuario != null) {
+        vista.onUsuarioSelected(usuario);
+      } else {
+        vista.showError("El usuario seleccionado ya no está registrado.");
+      }
+    } catch (RemoteException|NullPointerException ex) {
+      vista.showError("Error al conectar con el servidor.");
     }
   }
   

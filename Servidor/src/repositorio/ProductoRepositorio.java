@@ -5,6 +5,7 @@ import remoto.entidad.Producto;
 
 public interface ProductoRepositorio {
   
+  public Producto obtener(Integer id);
   public void guardar(Producto producto);
   public void actualizar(Producto producto);
   public void eliminar(Producto producto);

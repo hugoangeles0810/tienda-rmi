@@ -74,5 +74,22 @@ public class ProductosPresentadorImpl implements ProductosPresentador{
       vista.showError("Error al conectar con el servidor");
     }
   }
+
+  @Override
+  public void buscarPorId(Integer id) {
+    ProductoServicio productoServicio = ClienteRMI
+                                        .getInstance()
+                                        .obtenerServicio(ProductoServicio.class);  
+    try {
+      Producto producto = productoServicio.obtener(id);
+      if (producto != null) {
+        vista.onProductoSelected(producto);
+      } else {
+        vista.showError("El producto seleccionado ya no está registrado.");
+      }
+    } catch (RemoteException|NullPointerException ex) {
+      vista.showError("Error al conectar con el servidor.");
+    }
+  }
   
 }

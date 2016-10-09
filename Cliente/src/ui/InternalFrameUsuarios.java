@@ -286,13 +286,13 @@ public class InternalFrameUsuarios extends javax.swing.JInternalFrame
   private void jTableUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsuariosMouseClicked
     int row = jTableUsuarios.rowAtPoint(evt.getPoint());
     if (row >= 0) {
-      seleccionar(row);
+      usuariosPresentador.buscarPorId(usuarios.get(row).getId());
     }
   }//GEN-LAST:event_jTableUsuariosMouseClicked
 
-  private void seleccionar(int row) {
+  private void seleccionar(Usuario usuario) {
     enableForm(false);
-    usuarioForm = usuarios.get(row);
+    usuarioForm = usuario;
     fillForm(usuarioForm);
     UIHelper.seleccionar(jButtonNuevo, jButtonGuardar, jButtonModificar, jButtonEliminar, jButtonCancelar);
   }
@@ -467,5 +467,10 @@ public class InternalFrameUsuarios extends javax.swing.JInternalFrame
     }
     
     return true;
+  }
+
+  @Override
+  public void onUsuarioSelected(Usuario usuario) {
+    seleccionar(usuario);
   }
 }

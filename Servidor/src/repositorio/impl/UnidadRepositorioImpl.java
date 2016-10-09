@@ -180,5 +180,26 @@ public class UnidadRepositorioImpl implements UnidadRepositorio{
 
     return unidad;
   }
+
+  @Override
+  public Unidad obtener(Integer id) {
+    Unidad unidad = null;
+
+    try {
+      PreparedStatement statement = this.connection
+                .prepareStatement("select * from unidades where id=?");
+
+      statement.setInt(1, id);
+      ResultSet rs = statement.executeQuery();
+      if (rs.next()) {
+        unidad = parseUnidad(rs);
+      }
+
+    } catch(SQLException e) {
+      e.printStackTrace();
+    }
+
+    return unidad;
+  }
   
 }

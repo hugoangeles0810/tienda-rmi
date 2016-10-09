@@ -74,5 +74,22 @@ public class UnidadesPresentadorImpl implements UnidadesPresentador{
       vista.showError("Error al conectar con el servidor");
     }
   }
+
+  @Override
+  public void buscarPorId(Integer id) {
+    UnidadServicio unidadServicio = ClienteRMI
+                                        .getInstance()
+                                        .obtenerServicio(UnidadServicio.class); 
+    try {
+      Unidad unidad = unidadServicio.obtener(id);
+      if (unidad != null) {
+        vista.onUnidadSelected(unidad);
+      } else {
+        vista.showError("La unidad seleccionada ya no está registrado.");
+      }
+    } catch (RemoteException|NullPointerException ex) {
+      vista.showError("Error al conectar con el servidor.");
+    }
+  }
   
 }

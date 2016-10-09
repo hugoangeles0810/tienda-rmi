@@ -63,4 +63,9 @@ public class UsuarioServicioImpl extends UnicastRemoteObject
       return RespuestaServidor.getError("Error al eliminar el usuario.");
     }
   }
+
+  @Override
+  public Usuario obtener(Integer id) throws RemoteException {
+    return usuarioRepositorio.obtener(id);
+  }
 }

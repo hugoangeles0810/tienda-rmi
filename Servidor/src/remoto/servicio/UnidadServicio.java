@@ -8,6 +8,7 @@ import remoto.util.RespuestaServidor;
 
 public interface UnidadServicio extends Remote {
 
+  public Unidad obtener(Integer id) throws RemoteException;
   public List<Unidad> buscarUnidades(Unidad unidad) throws RemoteException;
   public RespuestaServidor guardarUnidad(Unidad unidad) throws RemoteException;
   public RespuestaServidor actualizarUnidad(Unidad unidad) throws RemoteException;

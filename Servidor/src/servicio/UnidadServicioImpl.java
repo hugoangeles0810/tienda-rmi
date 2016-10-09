@@ -68,4 +68,9 @@ public class UnidadServicioImpl extends UnicastRemoteObject
       return RespuestaServidor.getError("Error al eliminar la unidad.");
     }
   }
+
+  @Override
+  public Unidad obtener(Integer id) throws RemoteException {
+    return unidadRepositorio.obtener(id);
+  }
 }

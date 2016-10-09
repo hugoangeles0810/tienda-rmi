@@ -35,6 +35,8 @@ public class FramePrincipal extends javax.swing.JFrame
     jMenuItemMantProductos = new javax.swing.JMenuItem();
     jMenuItemMantUsuario = new javax.swing.JMenuItem();
     jMenuItemMantUnidades = new javax.swing.JMenuItem();
+    jMenuProcesos = new javax.swing.JMenu();
+    jMenuItemProcEntrMercaderia = new javax.swing.JMenuItem();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +96,18 @@ public class FramePrincipal extends javax.swing.JFrame
 
     jMenuBar.add(jMenuMantenimiento);
 
+    jMenuProcesos.setText("Procesos");
+
+    jMenuItemProcEntrMercaderia.setText("Entrada de mercaderia");
+    jMenuItemProcEntrMercaderia.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemProcEntrMercaderiaActionPerformed(evt);
+      }
+    });
+    jMenuProcesos.add(jMenuItemProcEntrMercaderia);
+
+    jMenuBar.add(jMenuProcesos);
+
     setJMenuBar(jMenuBar);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -151,12 +165,22 @@ public class FramePrincipal extends javax.swing.JFrame
     internalFrameProductos.show();
   }//GEN-LAST:event_jMenuItemMantProductosActionPerformed
 
+  private void jMenuItemProcEntrMercaderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProcEntrMercaderiaActionPerformed
+    if (internalFrameEntradaMercaderia == null || !internalFrameEntradaMercaderia.isDisplayable()) {
+      internalFrameEntradaMercaderia = new InternalFrameEntradaMercaderia();
+      jDesktopPane.add(internalFrameEntradaMercaderia);
+    }
+    internalFrameEntradaMercaderia.setLocation((getWidth()-internalFrameEntradaMercaderia.getWidth())/2, (getHeight()-internalFrameEntradaMercaderia.getHeight())/2);
+    internalFrameEntradaMercaderia.show();
+  }//GEN-LAST:event_jMenuItemProcEntrMercaderiaActionPerformed
+
  
 private PrincipalPresentador principalPresentador;
 private DialogLogin dialogLogin;
 private InternalFrameUsuarios internalFrameUsuarios;
 private InternalFrameUnidades internalFrameUnidades;
 private InternalFrameProductos internalFrameProductos;
+private InternalFrameEntradaMercaderia internalFrameEntradaMercaderia;
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JDesktopPane jDesktopPane;
   private javax.swing.JMenuBar jMenuBar;
@@ -165,8 +189,10 @@ private InternalFrameProductos internalFrameProductos;
   private javax.swing.JMenuItem jMenuItemMantProductos;
   private javax.swing.JMenuItem jMenuItemMantUnidades;
   private javax.swing.JMenuItem jMenuItemMantUsuario;
+  private javax.swing.JMenuItem jMenuItemProcEntrMercaderia;
   private javax.swing.JMenuItem jMenuItemSalir;
   private javax.swing.JMenu jMenuMantenimiento;
+  private javax.swing.JMenu jMenuProcesos;
   private javax.swing.JMenu jMenuSistema;
   // End of variables declaration//GEN-END:variables
 
@@ -189,6 +215,7 @@ private InternalFrameProductos internalFrameProductos;
     jMenuMantenimiento.setEnabled(value);
     jMenuItemIniciarSesion.setEnabled(!value);
     jMenuItemCerrarSesion.setEnabled(value);
+    jMenuProcesos.setEnabled(value);
   }
 
   @Override

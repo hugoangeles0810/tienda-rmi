@@ -247,6 +247,11 @@ public class DialogBuscadorUnidades extends javax.swing.JDialog implements Unida
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
   
+  @Override
+  public void onUnidadSelected(Unidad unidad) {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
+  
   private Unidad readBuscarForm() {
     Unidad unidad = new Unidad();
     unidad.setNombre(jTextFieldBNombre.getText());

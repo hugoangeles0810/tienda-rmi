@@ -336,7 +336,7 @@ public class InternalFrameProductos extends javax.swing.JInternalFrame
   private void jTableListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListadoMouseClicked
     int row = jTableListado.rowAtPoint(evt.getPoint());
     if (row >= 0) {
-      seleccionar(row);
+      productosPresentador.buscarPorId(productos.get(row).getId());
     }
   }//GEN-LAST:event_jTableListadoMouseClicked
 
@@ -442,9 +442,9 @@ private DialogBuscadorUnidades dialogBuscarUnidades;
     UIHelper.cancelar(jButtonNuevo, jButtonGuardar, jButtonModificar, jButtonEliminar, jButtonCancelar);
   }
   
-  private void seleccionar(int row) {
+  private void seleccionar(Producto producto) {
     enableForm(false);
-    productoForm = productos.get(row);
+    productoForm = producto;
     fillForm(productoForm);
     UIHelper.seleccionar(jButtonNuevo, jButtonGuardar, jButtonModificar, jButtonEliminar, jButtonCancelar);
   }
@@ -526,6 +526,11 @@ private DialogBuscadorUnidades dialogBuscarUnidades;
     dialogBuscarUnidades.dispose();
     jTextFieldUnidadId.setText(String.valueOf(unidad.getId()));
     jTextFieldUnidad.setText(unidad.getNombre());
+  }
+
+  @Override
+  public void onProductoSelected(Producto producto) {
+    seleccionar(producto);
   }
   
 }
