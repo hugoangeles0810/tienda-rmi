@@ -23,11 +23,12 @@ public class ProductoRepositorioImpl implements ProductoRepositorio{
   public void guardar(Producto producto) {
     try {
       PreparedStatement statement = this.connection
-                .prepareStatement("insert into productos (nombre, stock, unidad_id) values (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                .prepareStatement("insert into productos (nombre, stock, precio, unidad_id) values (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
       statement.setString(1, producto.getNombre());
       statement.setBigDecimal(2, producto.getStock());
-      statement.setInt(3, producto.getUnidad().getId());
+      statement.setBigDecimal(3, producto.getPrecio());
+      statement.setInt(4, producto.getUnidad().getId());
 
       statement.executeUpdate();
 
@@ -47,12 +48,13 @@ public class ProductoRepositorioImpl implements ProductoRepositorio{
   public void actualizar(Producto producto) {
     try {
       PreparedStatement statement = this.connection
-                .prepareStatement("update productos set nombre=?, stock=?, unidad_id=? where id=?");
+                .prepareStatement("update productos set nombre=?, stock=?, precio=?, unidad_id=? where id=?");
 
       statement.setString(1, producto.getNombre());
       statement.setBigDecimal(2, producto.getStock());
-      statement.setInt(3, producto.getUnidad().getId());
-      statement.setInt(4, producto.getId());
+      statement.setBigDecimal(3, producto.getPrecio());
+      statement.setInt(4, producto.getUnidad().getId());
+      statement.setInt(5, producto.getId());
 
       statement.executeUpdate();
 
@@ -81,7 +83,7 @@ public class ProductoRepositorioImpl implements ProductoRepositorio{
     List<Producto> productos = new ArrayList<>();
     try {
       PreparedStatement statement = this.connection
-                .prepareStatement("select p.id, p.nombre, p.stock, und.id, und.nombre, und.abreviatura from productos p inner join unidades und on p.unidad_id = und.id");
+                .prepareStatement("select p.id, p.nombre, p.stock, p.precio, und.id, und.nombre, und.abreviatura from productos p inner join unidades und on p.unidad_id = und.id");
 
       ResultSet rs = statement.executeQuery();
       while (rs.next()) {
@@ -100,7 +102,7 @@ public class ProductoRepositorioImpl implements ProductoRepositorio{
     List<Producto> productos = new ArrayList<>();
     try {
       PreparedStatement statement = this.connection
-                .prepareStatement("select p.id, p.nombre, p.stock, und.id, und.nombre, und.abreviatura from productos p inner join unidades und on p.unidad_id = und.id where p.nombre like ?");
+                .prepareStatement("select p.id, p.nombre, p.stock, p.precio, und.id, und.nombre, und.abreviatura from productos p inner join unidades und on p.unidad_id = und.id where p.nombre like ?");
       
       String nombre = "";
       
@@ -129,11 +131,12 @@ public class ProductoRepositorioImpl implements ProductoRepositorio{
       producto.setId(rs.getInt(1));
       producto.setNombre(rs.getString(2));
       producto.setStock(rs.getBigDecimal(3));
+      producto.setPrecio(rs.getBigDecimal(4));
       
       Unidad unidad = new Unidad();
-      unidad.setId(rs.getInt(4));
-      unidad.setNombre(rs.getString(5));
-      unidad.setAbreviatura(rs.getString(5));
+      unidad.setId(rs.getInt(5));
+      unidad.setNombre(rs.getString(6));
+      unidad.setAbreviatura(rs.getString(7));
       
       producto.setUnidad(unidad);
     } catch (SQLException ex) {
@@ -149,7 +152,7 @@ public class ProductoRepositorioImpl implements ProductoRepositorio{
 
     try {
       PreparedStatement statement = this.connection
-                .prepareStatement("select p.id, p.nombre, p.stock, und.id, und.nombre, und.abreviatura from productos p inner join unidades und on p.unidad_id = und.id where p.nombre=?");
+                .prepareStatement("select p.id, p.nombre, p.stock, p.precio, und.id, und.nombre, und.abreviatura from productos p inner join unidades und on p.unidad_id = und.id where p.nombre=?");
 
       statement.setString(1, nombre);
       ResultSet rs = statement.executeQuery();
@@ -170,7 +173,7 @@ public class ProductoRepositorioImpl implements ProductoRepositorio{
 
     try {
       PreparedStatement statement = this.connection
-                .prepareStatement("select p.id, p.nombre, p.stock, und.id, und.nombre, und.abreviatura from productos p inner join unidades und on p.unidad_id = und.id where p.id=?");
+                .prepareStatement("select p.id, p.nombre, p.stock, p.precio, und.id, und.nombre, und.abreviatura from productos p inner join unidades und on p.unidad_id = und.id where p.id=?");
 
       statement.setInt(1, id);
       ResultSet rs = statement.executeQuery();

@@ -53,6 +53,8 @@ public class InternalFrameProductos extends javax.swing.JInternalFrame
     jButtonCancelar = new javax.swing.JButton();
     jTextFieldId = new javax.swing.JTextField();
     jTextFieldUnidadId = new javax.swing.JTextField();
+    jLabel5 = new javax.swing.JLabel();
+    jTextFieldPrecio = new javax.swing.JTextField();
 
     setClosable(true);
     setIconifiable(true);
@@ -189,6 +191,8 @@ public class InternalFrameProductos extends javax.swing.JInternalFrame
       }
     });
 
+    jLabel5.setText("Precio");
+
     javax.swing.GroupLayout jPanelFormularioLayout = new javax.swing.GroupLayout(jPanelFormulario);
     jPanelFormulario.setLayout(jPanelFormularioLayout);
     jPanelFormularioLayout.setHorizontalGroup(
@@ -206,8 +210,6 @@ public class InternalFrameProductos extends javax.swing.JInternalFrame
                   .addComponent(jTextFieldUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonBuscarUnidad))
-              .addComponent(jLabel3)
-              .addComponent(jTextFieldStock, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addGroup(jPanelFormularioLayout.createSequentialGroup()
                 .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -224,7 +226,15 @@ public class InternalFrameProductos extends javax.swing.JInternalFrame
               .addGroup(jPanelFormularioLayout.createSequentialGroup()
                 .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldUnidadId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jTextFieldUnidadId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addGroup(jPanelFormularioLayout.createSequentialGroup()
+                .addGroup(jPanelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(jLabel3)
+                  .addComponent(jTextFieldStock, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(jLabel5)
+                  .addComponent(jTextFieldPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGap(0, 16, Short.MAX_VALUE)))
         .addContainerGap())
     );
@@ -238,13 +248,19 @@ public class InternalFrameProductos extends javax.swing.JInternalFrame
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(jLabel2)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(jPanelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jTextFieldUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jButtonBuscarUnidad))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(jLabel3)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jTextFieldStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGroup(jPanelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addGroup(jPanelFormularioLayout.createSequentialGroup()
+            .addGroup(jPanelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jTextFieldUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jButtonBuscarUnidad))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jLabel3)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jTextFieldStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(jPanelFormularioLayout.createSequentialGroup()
+            .addComponent(jLabel5)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jTextFieldPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addGap(7, 7, 7)
         .addGroup(jPanelFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,7 +275,7 @@ public class InternalFrameProductos extends javax.swing.JInternalFrame
               .addComponent(jButtonEliminar))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jButtonCancelar)))
-        .addContainerGap(114, Short.MAX_VALUE))
+        .addContainerGap(117, Short.MAX_VALUE))
     );
 
     javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
@@ -364,6 +380,7 @@ private DialogBuscadorUnidades dialogBuscarUnidades;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel3;
   private javax.swing.JLabel jLabel4;
+  private javax.swing.JLabel jLabel5;
   private javax.swing.JPanel jPanelFormulario;
   private javax.swing.JPanel jPanelListado;
   private javax.swing.JPanel jPanelPrincipal;
@@ -372,6 +389,7 @@ private DialogBuscadorUnidades dialogBuscarUnidades;
   private javax.swing.JTextField jTextFieldBNombre;
   private javax.swing.JTextField jTextFieldId;
   private javax.swing.JTextField jTextFieldNombre;
+  private javax.swing.JTextField jTextFieldPrecio;
   private javax.swing.JTextField jTextFieldStock;
   private javax.swing.JTextField jTextFieldUnidad;
   private javax.swing.JTextField jTextFieldUnidadId;
@@ -452,6 +470,7 @@ private DialogBuscadorUnidades dialogBuscarUnidades;
   private void enableForm(Boolean val) {
     jTextFieldNombre.setEnabled(val);
     jTextFieldStock.setEnabled(val);
+    jTextFieldPrecio.setEnabled(val);
     jButtonBuscarUnidad.setEnabled(val);
   }
   
@@ -477,6 +496,12 @@ private DialogBuscadorUnidades dialogBuscarUnidades;
     } else {
       jTextFieldStock.setText("");
     }
+    
+    if (producto.getPrecio()!= null) {
+      jTextFieldPrecio.setText(String.format("%.2f", producto.getPrecio().doubleValue()).replaceAll(",", "."));
+    } else {
+      jTextFieldPrecio.setText("");
+    }
   }
   
   private Producto readForm() {
@@ -498,6 +523,7 @@ private DialogBuscadorUnidades dialogBuscarUnidades;
     
     producto.setNombre(jTextFieldNombre.getText());
     producto.setStock(BigDecimal.valueOf(Double.valueOf(jTextFieldStock.getText())));
+    producto.setPrecio(BigDecimal.valueOf(Double.valueOf(jTextFieldPrecio.getText())));
     
     return producto;
   }
@@ -515,6 +541,11 @@ private DialogBuscadorUnidades dialogBuscarUnidades;
    
     if (!Validator.esDoubleEnRango(jTextFieldStock, 0d, Double.MAX_VALUE)) {
       showError("Debe ingresar un stock válido.");
+      return false;
+    }
+    
+    if (!Validator.esDoubleEnRango(jTextFieldStock, 0.01, Double.MAX_VALUE)) {
+      showError("Debe ingresar un precio válido.");
       return false;
     }
     

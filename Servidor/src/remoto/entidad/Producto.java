@@ -10,6 +10,7 @@ public class Producto implements Serializable {
   private Integer id;
   private String nombre;
   private BigDecimal stock;
+  private BigDecimal precio;
   private Unidad unidad;
 
   public Producto() {
@@ -47,6 +48,14 @@ public class Producto implements Serializable {
 
   public void setStock(BigDecimal stock) {
     this.stock = stock;
+  }
+
+  public BigDecimal getPrecio() {
+    return precio;
+  }
+
+  public void setPrecio(BigDecimal precio) {
+    this.precio = precio;
   }
 
   public Unidad getUnidad() {
