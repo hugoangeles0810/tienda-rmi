@@ -7,6 +7,7 @@ import remoto.entidad.Producto;
 import remoto.servicio.ProductoServicio;
 import remoto.util.RespuestaServidor;
 import repositorio.ProductoRepositorio;
+import util.BusinessException;
 
 public class ProductoServicioImpl extends UnicastRemoteObject
                  implements ProductoServicio {
@@ -59,7 +60,8 @@ public class ProductoServicioImpl extends UnicastRemoteObject
       productoRepositorio.eliminar(producto);
       return RespuestaServidor.getExito("Producto eliminado.");
     } catch(Exception e) {
-      return RespuestaServidor.getError("Error al eliminar la producto.");
+      String msg = e instanceof BusinessException ? e.getMessage() : "Error al eliminar el producto.";
+      return RespuestaServidor.getError(msg);
     }
   }
 

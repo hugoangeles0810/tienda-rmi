@@ -5,20 +5,26 @@ import java.rmi.NoSuchObjectException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import remoto.servicio.BoletaServicio;
 import remoto.servicio.GuiaServicio;
 import remoto.servicio.ProductoServicio;
 import remoto.servicio.UnidadServicio;
 import remoto.servicio.UsuarioServicio;
+import repositorio.BoletaCabeceraRepositorio;
+import repositorio.BoletaDetalleRepositorio;
 import repositorio.GuiaCabeceraRepositorio;
 import repositorio.GuiaDetalleRepositorio;
 import repositorio.ProductoRepositorio;
 import repositorio.UnidadRepositorio;
 import repositorio.UsuarioRepositorio;
+import repositorio.impl.BoletaCabeceraRepositorioImpl;
+import repositorio.impl.BoletaDetalleRepositorioImpl;
 import repositorio.impl.GuiaCabeceraRepositorioImpl;
 import repositorio.impl.GuiaDetalleRepositorioImpl;
 import repositorio.impl.ProductoRepositorioImpl;
 import repositorio.impl.UnidadRepositorioImpl;
 import repositorio.impl.UsuarioRepositorioImpl;
+import servicio.BoletaServicioImpl;
 import servicio.GuiaServicioImpl;
 import servicio.ProductoServicioImpl;
 import servicio.UnidadServicioImpl;
@@ -48,12 +54,17 @@ public class RMIServer {
       GuiaDetalleRepositorio guiaDetalleRepositorio = new GuiaDetalleRepositorioImpl(ConnectionFactory.getConnection());
       GuiaServicio guiaServicio = new GuiaServicioImpl(guiaCabeceraRepositorio, guiaDetalleRepositorio, productoRepositorio);
       
+      BoletaCabeceraRepositorio boletaCabeceraRepositorio = new BoletaCabeceraRepositorioImpl(ConnectionFactory.getConnection());
+      BoletaDetalleRepositorio boletaDetalleRepositorio = new BoletaDetalleRepositorioImpl(ConnectionFactory.getConnection());
+      BoletaServicio boletaServicio = new BoletaServicioImpl(boletaCabeceraRepositorio, boletaDetalleRepositorio, productoRepositorio);
+      
       registry = LocateRegistry.createRegistry(parametros.getPortRMI());
       
       registry.bind(usuarioServicio.getClass().getInterfaces()[0].getSimpleName(), usuarioServicio);
       registry.bind(unidadServicio.getClass().getInterfaces()[0].getSimpleName(), unidadServicio);
       registry.bind(productoServicio.getClass().getInterfaces()[0].getSimpleName(), productoServicio);
       registry.bind(guiaServicio.getClass().getInterfaces()[0].getSimpleName(), guiaServicio);
+      registry.bind(boletaServicio.getClass().getInterfaces()[0].getSimpleName(), boletaServicio);
       
     } catch (Exception e) {
       System.out.println("Error: " + e.getMessage());

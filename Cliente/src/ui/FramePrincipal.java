@@ -37,6 +37,7 @@ public class FramePrincipal extends javax.swing.JFrame
     jMenuItemMantUnidades = new javax.swing.JMenuItem();
     jMenuProcesos = new javax.swing.JMenu();
     jMenuItemProcEntrMercaderia = new javax.swing.JMenuItem();
+    jMenuItemProcVenta = new javax.swing.JMenuItem();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,6 +107,14 @@ public class FramePrincipal extends javax.swing.JFrame
     });
     jMenuProcesos.add(jMenuItemProcEntrMercaderia);
 
+    jMenuItemProcVenta.setText("Venta");
+    jMenuItemProcVenta.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItemProcVentaActionPerformed(evt);
+      }
+    });
+    jMenuProcesos.add(jMenuItemProcVenta);
+
     jMenuBar.add(jMenuProcesos);
 
     setJMenuBar(jMenuBar);
@@ -170,9 +179,18 @@ public class FramePrincipal extends javax.swing.JFrame
       internalFrameEntradaMercaderia = new InternalFrameEntradaMercaderia();
       jDesktopPane.add(internalFrameEntradaMercaderia);
     }
-    internalFrameEntradaMercaderia.setLocation((getWidth()-internalFrameEntradaMercaderia.getWidth())/2, (getHeight()-internalFrameEntradaMercaderia.getHeight())/2);
+    internalFrameEntradaMercaderia.setLocation((getWidth()-internalFrameEntradaMercaderia.getWidth())/2, (getHeight()-internalFrameEntradaMercaderia.getHeight())/2 - 10);
     internalFrameEntradaMercaderia.show();
   }//GEN-LAST:event_jMenuItemProcEntrMercaderiaActionPerformed
+
+  private void jMenuItemProcVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProcVentaActionPerformed
+    if (internalFrameVenta == null || !internalFrameVenta.isDisplayable()) {
+      internalFrameVenta = new InternalFrameVenta();
+      jDesktopPane.add(internalFrameVenta);
+    }
+    internalFrameVenta.setLocation((getWidth()-internalFrameVenta.getWidth())/2, (getHeight()-internalFrameVenta.getHeight())/2 - 10);
+    internalFrameVenta.show();
+  }//GEN-LAST:event_jMenuItemProcVentaActionPerformed
 
  
 private PrincipalPresentador principalPresentador;
@@ -181,6 +199,7 @@ private InternalFrameUsuarios internalFrameUsuarios;
 private InternalFrameUnidades internalFrameUnidades;
 private InternalFrameProductos internalFrameProductos;
 private InternalFrameEntradaMercaderia internalFrameEntradaMercaderia;
+private InternalFrameVenta internalFrameVenta;
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JDesktopPane jDesktopPane;
   private javax.swing.JMenuBar jMenuBar;
@@ -190,6 +209,7 @@ private InternalFrameEntradaMercaderia internalFrameEntradaMercaderia;
   private javax.swing.JMenuItem jMenuItemMantUnidades;
   private javax.swing.JMenuItem jMenuItemMantUsuario;
   private javax.swing.JMenuItem jMenuItemProcEntrMercaderia;
+  private javax.swing.JMenuItem jMenuItemProcVenta;
   private javax.swing.JMenuItem jMenuItemSalir;
   private javax.swing.JMenu jMenuMantenimiento;
   private javax.swing.JMenu jMenuProcesos;

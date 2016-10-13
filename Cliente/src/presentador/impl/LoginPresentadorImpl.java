@@ -1,13 +1,10 @@
 package presentador.impl;
 
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import presentador.LoginPresentador;
 import remoto.entidad.Usuario;
 import remoto.servicio.UsuarioServicio;
 import rmi.ClienteRMI;
-import util.Parametros;
 import vista.LoginVista;
 
 public class LoginPresentadorImpl implements LoginPresentador{

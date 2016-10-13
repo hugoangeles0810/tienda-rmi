@@ -7,6 +7,7 @@ import remoto.entidad.Unidad;
 import remoto.servicio.UnidadServicio;
 import remoto.util.RespuestaServidor;
 import repositorio.UnidadRepositorio;
+import util.BusinessException;
 
 public class UnidadServicioImpl extends UnicastRemoteObject
                  implements UnidadServicio {
@@ -65,7 +66,8 @@ public class UnidadServicioImpl extends UnicastRemoteObject
       unidadRepositorio.eliminar(unidad);
       return RespuestaServidor.getExito("Unidad eliminada.");
     } catch(Exception e) {
-      return RespuestaServidor.getError("Error al eliminar la unidad.");
+      String msg = e instanceof BusinessException ? e.getMessage() : "Error al eliminar la unidad.";
+      return RespuestaServidor.getError(msg);
     }
   }
 

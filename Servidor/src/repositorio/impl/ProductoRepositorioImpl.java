@@ -1,5 +1,6 @@
 package repositorio.impl;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,8 @@ import java.util.List;
 import remoto.entidad.Producto;
 import remoto.entidad.Unidad;
 import repositorio.ProductoRepositorio;
+import util.BusinessException;
+import util.Constantes;
 
 public class ProductoRepositorioImpl implements ProductoRepositorio{
   
@@ -64,7 +67,7 @@ public class ProductoRepositorioImpl implements ProductoRepositorio{
   }
 
   @Override
-  public void eliminar(Producto producto) {
+  public void eliminar(Producto producto) throws BusinessException {
     try {
       PreparedStatement statement = this.connection
                 .prepareStatement("delete from productos where id=?");
@@ -72,9 +75,12 @@ public class ProductoRepositorioImpl implements ProductoRepositorio{
       statement.setInt(1, producto.getId());
       statement.executeUpdate();
       producto.setId(null);
-      
     } catch(SQLException e) {
+      if (e.getErrorCode() == Constantes.FOREIGN_KEY_VIOLATION) {
+        throw new BusinessException("Este producto tiene una o más entidades relacionadas asegurese de eliminarlas primero.");
+      }
       e.printStackTrace();
+      throw new BusinessException("Error al eliminar el producto.");
     }
   }
 

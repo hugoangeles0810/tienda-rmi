@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import remoto.entidad.Unidad;
 import repositorio.UnidadRepositorio;
+import util.BusinessException;
+import util.Constantes;
 
 public class UnidadRepositorioImpl implements UnidadRepositorio{
   
@@ -59,7 +61,7 @@ public class UnidadRepositorioImpl implements UnidadRepositorio{
   }
 
   @Override
-  public void eliminar(Unidad unidad) {
+  public void eliminar(Unidad unidad) throws BusinessException{
     try {
       PreparedStatement statement = this.connection
                 .prepareStatement("delete from unidades where id=?");
@@ -69,7 +71,11 @@ public class UnidadRepositorioImpl implements UnidadRepositorio{
       unidad.setId(null);
       
     } catch(SQLException e) {
+      if (e.getErrorCode() == Constantes.FOREIGN_KEY_VIOLATION) {
+        throw new BusinessException("Esta unidad tiene una o más entidades relacionadas asegurese de eliminarlas primero.");
+      }
       e.printStackTrace();
+      throw new BusinessException("Error al eliminar la unidad.");
     }
   }
 

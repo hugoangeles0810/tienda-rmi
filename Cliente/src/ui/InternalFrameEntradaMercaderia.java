@@ -298,7 +298,7 @@ public class InternalFrameEntradaMercaderia extends javax.swing.JInternalFrame
       return false;
     }
     
-    if (!Validator.esDoubleEnRango(jTextFieldCantidad, 0d, Double.MAX_VALUE)) {
+    if (!Validator.esDoubleEnRango(jTextFieldCantidad, 0.01, Double.MAX_VALUE)) {
       showError("Debe ingresar una cantidad válida.");
       return false;
     }
